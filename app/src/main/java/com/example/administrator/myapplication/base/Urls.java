@@ -22,4 +22,10 @@ public class Urls {
     public static final String PREPAYURL = "machineAdmin/main/prePay";
     //货舱有货  打开货舱门
     public static final String OPENDOOR = "machineAdmin/main/getProduct";
+
+
+    /*                                       新版接口                                             */
+
+    //测试服务器地址
+    public static final String NEWBASEURL = "http://192.168.1.111:8762/";
 }

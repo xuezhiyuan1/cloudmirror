@@ -2,17 +2,14 @@ package com.example.administrator.myapplication.queen;
 
 import android.os.Environment;
 import android.util.Log;
-
 import com.example.administrator.myapplication.base.Keys;
 import com.example.administrator.myapplication.model.util.MakeFileUtils;
 import com.rabbitmq.client.Channel;
-
 import org.json.JSONObject;
 import org.springframework.amqp.core.Address;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -214,7 +211,6 @@ public class ClientConsumer implements ChannelAwareMessageListener {
         rabbitTemplate.convertAndSend(replyTo.getExchangeName(), replyTo.getRoutingKey(), resultData);
     }
 
-
     //  出货接口
     private String machinePushGoods(Integer machineId, Integer x, Integer y, Integer z, Integer deliverySpeed) {
         try {
@@ -238,7 +234,6 @@ public class ClientConsumer implements ChannelAwareMessageListener {
         }
     }
 
-
     //    前置电机归位
     private String machineFrontBack(Integer machineId) {
         try {
@@ -249,7 +244,6 @@ public class ClientConsumer implements ChannelAwareMessageListener {
             return "400";
         }
     }
-
 
     //    后置电机测试
     private String machineBehindTest(Integer machineId, Integer x, Integer y) {
@@ -287,7 +281,6 @@ public class ClientConsumer implements ChannelAwareMessageListener {
             return "400";
         }
     }
-
 
     //新的取货
     private String machineTackShop(Integer machineId) {
@@ -389,6 +382,7 @@ public class ClientConsumer implements ChannelAwareMessageListener {
             return data;
         } catch (Exception e) {
             e.printStackTrace();
+            connection.disconnect();
             return "400";
         } finally {
             if (connection != null) {
@@ -397,5 +391,4 @@ public class ClientConsumer implements ChannelAwareMessageListener {
             }
         }
     }
-
 }

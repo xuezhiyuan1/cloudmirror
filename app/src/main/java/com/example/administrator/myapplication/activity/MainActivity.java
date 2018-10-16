@@ -26,6 +26,7 @@ import com.example.administrator.myapplication.model.util.MakeFileUtils;
 import com.example.administrator.myapplication.model.util.ReadFileUtil;
 import com.example.administrator.myapplication.queen.ClientConsumer;
 import com.google.gson.Gson;
+import com.tencent.bugly.crashreport.CrashReport;
 
 
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -67,18 +68,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     //,imageViewGone
     //线程
     Thread newworkT;
-    //RelativeLayout relativeLayout;
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        CrashReport.initCrashReport(getApplicationContext(),"3d2b183a7d",true);
         createFile(Keys.FILE_URI_PATH, Keys.FILE_NAME);
         writeFile();
-        //relativeLayout = findViewById(R.id.relativeAd);
-        //imageViewGone = findViewById(R.id.goneImage);
         imageViewBig =  findViewById(R.id.image);
         imageViewBee =  findViewById(R.id.bee);
         imageViewGoTo =  findViewById(R.id.goTo);
@@ -103,9 +100,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }else {
             Gson gson = new Gson();
             ShopListBean shopListBean = gson.fromJson(json,ShopListBean.class);
-            /*imageViewGone.setVisibility(View.GONE);
-            relativeLayout.setVisibility(View.VISIBLE);
-            imageViewBig.setVisibility(View.VISIBLE);*/
             List<ShopListBean.DataBean.LeftImgBean> leftImg = shopListBean.getData().getLeftImg();
             List<ShopListBean.DataBean.RightImgBean> rightImg = shopListBean.getData().getRightImg();
             List<ShopListBean.DataBean.MachineAdvertisementListWelcomeBean> welcome = shopListBean.getData().getMachineAdvertisementList_welcome();
